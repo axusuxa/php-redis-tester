@@ -1,0 +1,27 @@
+version: "3.2"
+
+networks:
+  monitoring:
+
+services:
+  redistester:
+    image: axus/php-redis-tester:latest
+    ports:
+      - "8000:8000"
+    networks:
+      - monitoring
+    deploy:
+      mode: replicated
+      replicas: 10
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 128M
+        reservations:
+          cpus: '0.50'
+          memory: 64M
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
