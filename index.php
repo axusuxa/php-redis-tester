@@ -16,24 +16,5 @@ function addport($ips,$port){
     return $ips;
 }
 
-require "predis/autoload.php";
-PredisAutoloader::register();
-
-try {
-	$redis = new PredisClient();
-
-	// This connection is for a remote server
-	
-		$redis = new PredisClient(array(
-		    "scheme" => "tcp",
-		    "host" => "redis",
-		    "port" => 6379
-		));
-	
-}
-catch (Exception $e) {
-	die($e->getMessage());
-}
-
 echo gethostbyname('redis');
 ?>
